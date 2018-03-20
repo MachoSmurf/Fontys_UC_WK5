@@ -3,8 +3,6 @@ package calculate;
 import timeutil.TimeStamp;
 import uckochfractalfx.UCKochFractalFX;
 
-import java.lang.reflect.Array;
-import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
