@@ -3,6 +3,7 @@ package calculate;
 import timeutil.TimeStamp;
 import uckochfractalfx.UCKochFractalFX;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -23,6 +24,7 @@ public class KochManager implements Observer{
     }
 
     public void changeLevel(int nextLevel) {
+        edgeList.clear();
         kochFractal.setLevel(nextLevel);
         timeStamp = new TimeStamp();
         timeStamp.setBegin("Berekening start");
@@ -30,17 +32,20 @@ public class KochManager implements Observer{
         kochFractal.generateLeftEdge();
         kochFractal.generateBottomEdge();
         timeStamp.setEnd("Berkening einde");
+        application.setTextCalc(timeStamp.toString());
         drawEdges();
     }
 
     public void drawEdges() {
-        application.clearKochPanel();
-        application.setTextCalc(timeStamp.toString());
         application.setTextNrEdges("" + kochFractal.getNrOfEdges());
+        TimeStamp ts = new TimeStamp();
+        ts.setBegin("Tekenen Start");
+        application.clearKochPanel();
         for (Edge e : edgeList){
             application.drawEdge(e);
         }
-        edgeList.clear();
+        ts.setEnd("Tekenen Eind");
+        application.setTextDraw(ts.toString());
     }
 
     @Override
