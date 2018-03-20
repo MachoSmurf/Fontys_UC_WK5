@@ -36,6 +36,7 @@ public class KochManager implements Observer{
         kochFractal.generateBottomEdge();
         timeStamp.setEnd("Berkening einde");
         application.setTextCalc(timeStamp.toString());
+        application.setTextNrEdges("" + kochFractal.getNrOfEdges());
         for (Edge e : edgeList){
             application.drawEdge(e);
         }
