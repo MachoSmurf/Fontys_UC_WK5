@@ -24,17 +24,17 @@ public class KochManager implements Observer{
 
     public void changeLevel(int nextLevel) {
         kochFractal.setLevel(nextLevel);
-        drawEdges();
-    }
-
-    public void drawEdges() {
-        application.clearKochPanel();
         timeStamp = new TimeStamp();
         timeStamp.setBegin("Berekening start");
         kochFractal.generateRightEdge();
         kochFractal.generateLeftEdge();
         kochFractal.generateBottomEdge();
         timeStamp.setEnd("Berkening einde");
+        drawEdges();
+    }
+
+    public void drawEdges() {
+        application.clearKochPanel();
         application.setTextCalc(timeStamp.toString());
         application.setTextNrEdges("" + kochFractal.getNrOfEdges());
         for (Edge e : edgeList){
