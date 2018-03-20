@@ -1,5 +1,6 @@
 package calculate;
 
+import timeutil.TimeStamp;
 import uckochfractalfx.UCKochFractalFX;
 
 import java.util.ArrayList;
@@ -11,12 +12,14 @@ public class KochManager implements Observer{
     private KochFractal kochFractal;
     private UCKochFractalFX application;
     private ArrayList<Edge> edgeList;
+    private TimeStamp timeStamp;
 
     public KochManager(UCKochFractalFX ucKochFractalFX) {
         this.application = ucKochFractalFX;
         kochFractal = new KochFractal();
         kochFractal.addObserver(this);
         edgeList = new ArrayList<>();
+        timeStamp = new TimeStamp();
     }
 
     public void changeLevel(int nextLevel) {
@@ -26,12 +29,17 @@ public class KochManager implements Observer{
 
     public void drawEdges() {
         application.clearKochPanel();
+        timeStamp = new TimeStamp();
+        timeStamp.setBegin("Berekening start");
         kochFractal.generateRightEdge();
         kochFractal.generateLeftEdge();
         kochFractal.generateBottomEdge();
+        timeStamp.setEnd("Berkening einde");
+        application.setTextCalc(timeStamp.toString());
         for (Edge e : edgeList){
             application.drawEdge(e);
         }
+        edgeList.clear();
     }
 
     @Override
